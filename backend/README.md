@@ -1,4 +1,4 @@
-### local setup
+### local setuph
 Video instructions: https://youtu.be/PPxenu7IjGM
 
 - `cd /backend`
