@@ -21,7 +21,10 @@ import {
   MINIO_SECRET_KEY,
   MINIO_BUCKET,
   MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY
+  MEILISEARCH_ADMIN_KEY,
+    TOLGEE_API_URL,
+  TOLGEE_API_KEY,
+  TOLGEE_PROJECT_ID
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -135,6 +138,24 @@ const medusaConfig = {
     }] : [])
   ],
   plugins: [
+      // ✅ Tolgee translations
+  {
+    resolve: 'medusa-plugin-tolgee',
+    /** @type {import('medusa-plugin-tolgee').TolgeeModuleConfig} */
+    options: {
+      baseURL: TOLGEE_API_URL,
+      apiKey: TOLGEE_API_KEY,
+      projectId: TOLGEE_PROJECT_ID,
+      // Optional tuning (safe defaults shown):
+      ttl: 1000 * 60 * 5, // 5 minutes cache
+      rateLimit: { maxRequests: 15, perMilliseconds: 3000 },
+      batchingDelayMilliseconds: 50,
+      // Optional: only translate specific fields per model
+      // keys: { product: ['title', 'subtitle', 'description'] },
+      // Optional: tag translations in Tolgee
+      // tags: { product: ['medusa'] },
+    },
+  },
   ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY ? [{
       resolve: '@rokmohar/medusa-plugin-meilisearch',
       options: {

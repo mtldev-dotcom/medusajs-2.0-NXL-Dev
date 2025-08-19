@@ -58,6 +58,10 @@ export const COOKIE_SECRET = assertValue(
   'Environment variable for COOKIE_SECRET is not set',
 )
 
+export const TOLGEE_API_URL = process.env.TOLGEE_API_URL as string
+export const TOLGEE_API_KEY = process.env.TOLGEE_API_KEY as string
+export const TOLGEE_PROJECT_ID = process.env.TOLGEE_PROJECT_ID as string
+
 /**
  * (optional) Minio configuration for file storage
  */
